@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>Propiedad Requerida con Tamaño Máximo usando Fluent API</Title>
+            <Author>Jimmy Javier</Author>
+            <Description>Crea la definición de una propiedad requerida con tamaño máximo mediante el uso de Fluent API.</Description>
+            <Shortcut>faproreqhml</Shortcut>
+        </Header>
+        <Snippet>
+            <Declarations>
+                <Literal>
+                    <ID>Propiedad</ID>
+                    <ToolTip>Nombre de la propiedad.</ToolTip>
+                    <Default>Propiedad</Default>
+                </Literal>
+                <Literal>
+                    <ID>Tamanio</ID>
+                    <ToolTip>Tamaño de la propiedad.</ToolTip>
+                    <Default>100</Default>
+                </Literal>
+            </Declarations> 
+            <Code Language="CSharp">
+                <![CDATA[builder.Property(p => p.$Propiedad$)
+                .IsRequired()
+                .HasMaxLength($Tamanio$);
+                $end$]]>
+            </Code>             
+        </Snippet>
+    </CodeSnippet>
+</CodeSnippets>

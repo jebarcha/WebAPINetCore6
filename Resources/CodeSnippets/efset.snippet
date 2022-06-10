@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>Definición una propiedad DbSet</Title>
+            <Author>Jimmy Javier</Author>
+            <Description>Define una propiedad DbSet.</Description>
+            <Shortcut>efset</Shortcut>
+        </Header>
+        <Snippet>
+            <Declarations>
+                <Literal>
+                    <ID>Clase</ID>
+                    <ToolTip>Nombre de la clase entidad.</ToolTip>
+                    <Default>Clase</Default>
+                </Literal>
+                <Literal>
+                    <ID>Coleccion</ID>
+                    <ToolTip>Nombre de la colección de entidades.</ToolTip>
+                    <Default>Coleccion</Default>
+                </Literal>
+            </Declarations> 
+            <Code Language="CSharp">
+                <![CDATA[public DbSet<$Clase$> $Coleccion$ { get; set; }$end$]]>
+            </Code>             
+        </Snippet>
+    </CodeSnippet>
+</CodeSnippets>

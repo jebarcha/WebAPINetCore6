@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>Clase de Configuración de la clase entidad Rol</Title>
+			<Shortcut>rolconf</Shortcut>
+			<Description>Fragmento de código para generar la clase de configuración para la entidad Rol.</Description>
+			<Author>Jimmy Javier</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>			
+            <Imports>                
+                <Import>
+                    <Namespace>Core.Entities</Namespace>
+                </Import>                
+                <Import>
+                    <Namespace>Microsoft.EntityFrameworkCore</Namespace>
+                </Import>
+                <Import>
+                    <Namespace>Microsoft.EntityFrameworkCore.Metadata.Builders</Namespace>
+                </Import>
+            </Imports>
+			<Code Language="csharp"><![CDATA[public class RolConfiguration:IEntityTypeConfiguration<Rol>
+            {
+                public void Configure(EntityTypeBuilder<Rol> builder)
+                {
+                    builder.ToTable("Rol");
+                    builder.Property(p => p.Id)
+                    .IsRequired();
+                    builder.Property(p => p.Nombre)
+                            .IsRequired()
+                            .HasMaxLength(200);
+                }
+            }
+            $end$]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>

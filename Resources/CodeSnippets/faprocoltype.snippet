@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>Propiedad con tipo de columnausando Fluent API</Title>
+            <Author>Jimmy Javier</Author>
+            <Description>Crea la definición de una propiedad con tipo de columna mediante el uso de Fluent API.</Description>
+            <Shortcut>faprocoltype</Shortcut>
+        </Header>
+        <Snippet>
+            <Declarations>
+                <Literal>
+                    <ID>Propiedad</ID>
+                    <ToolTip>Nombre de la propiedad.</ToolTip>
+                    <Default>Propiedad</Default>
+                </Literal>
+                <Literal>
+                    <ID>TipoPropiedad</ID>
+                    <ToolTip>Tipo de la propiedad.</ToolTip>
+                    <Default>decimal(18,2)</Default>
+                </Literal>
+            </Declarations> 
+            <Code Language="CSharp">
+                <![CDATA[builder.Property(p => p.$Propiedad$)
+                .HasColumnType("$TipoPropiedad$");
+                $end$]]>
+            </Code>             
+        </Snippet>
+    </CodeSnippet>
+</CodeSnippets>

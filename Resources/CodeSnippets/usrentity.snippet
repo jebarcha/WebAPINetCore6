@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>Clase Usuario</Title>
+			<Shortcut>usrent</Shortcut>
+			<Description>Fragmento de código para generar la clase entidad Usuario.</Description>
+			<Author>Jimmy Javier</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>			            
+			<Code Language="csharp"><![CDATA[public class Usuario:BaseEntity
+            {
+                public string Nombres { get; set; }
+                public string ApellidoPaterno { get; set; }
+                public string ApellidoMaterno { get; set; }
+                public string Username { get; set; }
+                public string Email { get; set; }
+                public string Password { get; set; }
+                public ICollection<Rol> Roles { get; set; } = new HashSet<Rol>();                
+                public ICollection<UsuariosRoles> UsuariosRoles { get; set; }
+            }
+            $end$]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>

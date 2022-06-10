@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>Clase de Configuración de la clase entidad RefreshToken.</Title>
+			<Shortcut>reftokconf</Shortcut>
+			<Description>Fragmento de código para generar la clase de configuración para la entidad RefreshToken.</Description>
+			<Author>Jimmy Javier</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>			
+            <Imports>                
+                <Import>
+                    <Namespace>Core.Entities</Namespace>
+                </Import>                
+                <Import>
+                    <Namespace>Microsoft.EntityFrameworkCore</Namespace>
+                </Import>
+                <Import>
+                    <Namespace>Microsoft.EntityFrameworkCore.Metadata.Builders</Namespace>
+                </Import>
+            </Imports>
+			<Code Language="csharp"><![CDATA[public class RefreshTokenConfiguration: IEntityTypeConfiguration<RefreshToken>
+            {
+                public void Configure(EntityTypeBuilder<RefreshToken> builder)
+                {
+                    builder.ToTable("RefreshToken");
+                } 
+            }
+            $end$]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>Clase Params</Title>
+			<Shortcut>pagparams</Shortcut>
+			<Description>Fragmento de código para generar la clase Params que contiene información de la paginación.</Description>
+			<Author>Jimmy Javier</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>			            
+			<Code Language="csharp"><![CDATA[public class Params
+            {
+                private int _pageSize = 5;
+                private const int MaxPageSize = 50;
+                private int _pageIndex = 1;    
+                public int PageSize {
+                    get => _pageSize;
+                    set => _pageSize = (value > MaxPageSize) ? MaxPageSize : value;
+                }
+                public int PageIndex
+                {
+                    get => _pageIndex;
+                    set => _pageIndex = (value <= 0) ? 1 : value;
+                }    
+            }
+            $end$]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>Inicialización tabla producto con datos</Title>
+            <Author>Jimmy Javier</Author>
+            <Description>Bloque de código para el llenado de la tabla producto.</Description>
+            <Shortcut>efseedpro</Shortcut>
+        </Header>
+        <Snippet>            
+            <Code Language="CSharp">
+                <![CDATA[if(!context.Productos.Any()){
+                using(var readerProductos = new StreamReader(ruta+@"/Data/Csvs/productos.csv")){
+                    using(var csvProductos = new CsvReader(readerProductos,CultureInfo.InvariantCulture)){
+                        var listadoProductosCsv = csvProductos.GetRecords<Producto>();
+
+                        List<Producto> productos = new List<Producto>();
+                        foreach(var item in listadoProductosCsv){
+                            productos.Add(new Producto{
+                                Id = item.Id,
+                                Nombre = item.Nombre,
+                                Precio = item.Precio,
+                                FechaCreacion = item.FechaCreacion,
+                                CategoriaId = item.CategoriaId,
+                                MarcaId = item.MarcaId,                                                               
+                            });
+                        }
+
+                        context.Productos.AddRange(productos);
+                        await context.SaveChangesAsync();
+                    }
+                }
+            }$end$]]>
+            </Code>             
+        </Snippet>
+    </CodeSnippet>
+</CodeSnippets>

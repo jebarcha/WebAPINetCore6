@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>Método CreateRefreshToken.</Title>
+			<Shortcut>usrsercrt</Shortcut>
+			<Description>Fragmento de código para generar el método CreateRefreshToken.</Description>
+			<Author>Jimmy Javier</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>			
+            <Imports>                
+                <Import>
+                    <Namespace>System.Security.Cryptography</Namespace>
+                </Import>                                
+            </Imports>
+			<Code Language="csharp"><![CDATA[private RefreshToken CreateRefreshToken()
+            {
+                var randomNumber = new byte[32];
+                using (var generator = RandomNumberGenerator.Create())
+                {
+                    generator.GetBytes(randomNumber);
+                    return new RefreshToken
+                    {
+                        Token = Convert.ToBase64String(randomNumber),
+                        Expires = DateTime.UtcNow.AddDays(10),
+                        Created = DateTime.UtcNow
+                    };
+                }
+            }
+            $end$]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>

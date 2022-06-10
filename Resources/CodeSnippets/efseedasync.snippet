@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>Inicialización de las tablas con información inicial</Title>
+            <Author>Jimmy Javier</Author>
+            <Description>Crea el método para inicializar las tablas con datos.</Description>
+            <Shortcut>efseedasync</Shortcut>
+        </Header>
+        <Snippet>
+            <Declarations>
+                <Literal>
+                    <ID>ClaseEntidad</ID>
+                    <ToolTip>Nombre de la clase entidad.</ToolTip>
+                    <Default>Clase</Default>
+                </Literal>            
+            </Declarations> 
+            <Code Language="CSharp">
+                <![CDATA[public static async Task SeedAsync(TiendaContext context, ILoggerFactory loggerFactory){
+                try
+                {
+                    var ruta = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+
+                 }
+                catch (Exception ex)
+                {
+                    var logger = loggerFactory.CreateLogger<TiendaContextSeed>();
+                    logger.LogError(ex.Message);
+                }
+            }$end$]]>
+            </Code>
+             <Imports>
+                <Import>
+                    <Namespace>Core.Entities</Namespace>
+                </Import>
+                <Import>
+                    <Namespace>Microsoft.Extensions.Logging</Namespace>
+                </Import>
+                <Import>
+                    <Namespace>System.Globalization</Namespace>
+                </Import>
+                <Import>
+                    <Namespace>System.Reflection</Namespace>
+                </Import>
+                <Import>
+                    <Namespace>CsvHelper</Namespace>
+                </Import>
+            </Imports>
+        </Snippet>
+    </CodeSnippet>
+</CodeSnippets>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>ProductoDto</Title>
+			<Shortcut>dtopro</Shortcut>
+			<Description>Fragmento de código para generar la clase ProductoDto.</Description>
+			<Author>Jimmy Javier</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>			            
+			<Code Language="csharp"><![CDATA[public class ProductoDto
+            {
+                public int Id { get; set; }
+                public string Nombre { get; set; }
+                public decimal Precio { get; set; }
+                public DateTime FechaCreacion { get; set; }
+                public MarcaDto Marca { get; set; }
+                public CategoriaDto Categoria { get; set; }
+            }
+            $end$]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>

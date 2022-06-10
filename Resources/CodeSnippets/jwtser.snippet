@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>Método de Extensión para la configuración del Json Web Token.</Title>
+			<Shortcut>jwtser</Shortcut>
+			<Description>Fragmento de código para la configuración del Json Web Token.</Description>
+			<Author>Jimmy Javier</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>			
+            <Imports>                
+                <Import>
+                    <Namespace>API.Helpers</Namespace>
+                </Import>
+                <Import>
+                    <Namespace>Microsoft.AspNetCore.Authentication.JwtBearer</Namespace>
+                </Import>
+                <Import>
+                    <Namespace>Microsoft.IdentityModel.Tokens</Namespace>
+                </Import>
+                <Import>
+                    <Namespace>System.Text</Namespace>
+                </Import>                
+            </Imports>
+			<Code Language="csharp"><![CDATA[public static void AddJwt(this IServiceCollection services, IConfiguration configuration)
+            {
+                //Configuration from AppSettings
+                services.Configure<JWT>(configuration.GetSection("JWT"));
+
+                //Adding Athentication - JWT
+                services.AddAuthentication(options =>
+                {
+                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
+                    .AddJwtBearer(o =>
+                    {
+                        o.RequireHttpsMetadata = false;
+                        o.SaveToken = false;
+                        o.TokenValidationParameters = new TokenValidationParameters
+                        {
+                            ValidateIssuerSigningKey = true,
+                            ValidateIssuer = true,
+                            ValidateAudience = true,
+                            ValidateLifetime = true,
+                            ClockSkew = TimeSpan.Zero,
+                            ValidIssuer = configuration["JWT:Issuer"],
+                            ValidAudience = configuration["JWT:Audience"],
+                            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:Key"]))
+                        };
+                    });
+            }
+            $end$]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>DatosUsuarioDto</Title>
+			<Shortcut>dtousrdat</Shortcut>
+			<Description>Fragmento de código para generar la clase DatosUsuarioDto.</Description>
+			<Author>Jimmy Javier</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>			       
+            <Imports>                
+                <Import>
+                    <Namespace>System.ComponentModel.DataAnnotations</Namespace>
+                </Import>            
+            </Imports>     
+			<Code Language="csharp"><![CDATA[public class DatosUsuarioDto
+            {
+                public string Mensaje { get; set; }
+                public bool EstaAutenticado { get; set; }
+                public string UserName { get; set; }
+                public string Email { get; set; }
+                public List<string> Roles { get; set; }
+                public string Token { get; set; }
+            }
+            $end$]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>

@@ -1,0 +1,360 @@
+{
+	"info": {
+		"_postman_id": "731f886b-a7fc-4752-ab88-d86d18af6667",
+		"name": "TiendaCollection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Producto",
+			"item": [
+				{
+					"name": "GetProductos",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Version",
+								"value": "1.1",
+								"type": "default",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://localhost:5001/api/productos?pageIndex=1&pageSize=3&search=yamaha",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"productos"
+							],
+							"query": [
+								{
+									"key": "pageIndex",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "3"
+								},
+								{
+									"key": "search",
+									"value": "yamaha"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetProductoById",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/atom+xml",
+								"type": "default",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://localhost:5001/api/productos/10",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"productos",
+								"10"
+							],
+							"query": [
+								{
+									"key": "ver",
+									"value": "1.1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ProductosAdd",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":0,\r\n    \"nombre\": \"Producto Nuevo 002X2\",\r\n    \"precio\": 1234,\r\n    \"fechaCreacion\": \"2022-02-02\",\r\n    \"marcaId\":2,\r\n    \"categoriaId\":2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/productos",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"productos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ProductosUpdate",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Producto Nuevo XXX002\",\r\n    \"precio\": 654321.00,\r\n    \"fechaCreacion\": \"2022-03-03T00:00:00\",\r\n    \"marcaId\": 3,    \r\n    \"categoriaId\": 3,    \r\n    \"id\": 29\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/productos/29",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"productos",
+								"29"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ProductosDelete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/api/productos/29",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"productos",
+								"29"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "JWT",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombres\":\"Jimmy Javier\",\r\n    \"apellidoPaterno\":\"Apellido Paterno\",\r\n    \"apellidoMaterno\":\"Apellido Materno\",\r\n    \"email\":\"jimmyjavier@correo.com\",\r\n    \"username\":\"jimmyjavier@correo.com\",\r\n    \"password\":\"Pa$$w0rd.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/usuarios/register",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"usuarios",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetTokenAsync",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const datosUsuario = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Has properties\",function(){\r",
+									"    pm.expect(datosUsuario).to.have.property('userName');\r",
+									"    pm.expect(datosUsuario).to.have.property('token');\r",
+									"    pm.expect(datosUsuario).to.have.property('email');\r",
+									"});\r",
+									"\r",
+									"if(pm.test(\"Has properties\")){\r",
+									"    pm.globals.set('token',datosUsuario.token);\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n    \"username\":\"jimmyjavier@correo.com\",\r\n    \"password\":\"Pa$$w0rd.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/usuarios/token",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"usuarios",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddRoleAsync",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n    \"userName\":\"jimmyjavier@correo.com\",\r\n    \"password\":\"Pa$$w0rd.\",\r\n    \"role\":\"Administrador\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/usuarios/addrole",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"usuarios",
+								"addrole"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RefreshToken",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const datosUsuario = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Has properties\",function(){\r",
+									"    pm.expect(datosUsuario).to.have.property('userName');\r",
+									"    pm.expect(datosUsuario).to.have.property('token');\r",
+									"    pm.expect(datosUsuario).to.have.property('email');\r",
+									"});\r",
+									"\r",
+									"if(pm.test(\"Has properties\")){\r",
+									"    pm.globals.set('token',datosUsuario.token);\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/api/usuarios/refresh-token",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"usuarios",
+								"refresh-token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

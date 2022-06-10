@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>Clase Relación UsuariosRoles</Title>
+			<Shortcut>usrrolent</Shortcut>
+			<Description>Fragmento de código para generar la clase relación UsuariosRoles.</Description>
+			<Author>Jimmy Javier</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>			            
+			<Code Language="csharp"><![CDATA[public class UsuariosRoles
+            {
+                public int UsuarioId { get; set; }
+                public Usuario Usuario { get; set; }
+                public int RolId { get; set; }
+                public Rol Rol { get; set; }
+            }
+            $end$]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>

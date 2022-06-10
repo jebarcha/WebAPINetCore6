@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>Repositorio Genérico</Title>
+			<Shortcut>repoprogetid</Shortcut>
+			<Description>Fragmento de código para generar un repositorio genérico</Description>
+			<Author>Jimmy Javier</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>			
+            <Imports>                
+                <Import>
+                    <Namespace>Core.Entities</Namespace>
+                </Import>
+                <Import>
+                    <Namespace>Core.Interfaces</Namespace>
+                </Import>
+                <Import>
+                    <Namespace>Infrastructure.Data</Namespace>
+                </Import>
+                <Import>
+                    <Namespace>Microsoft.EntityFrameworkCore</Namespace>
+                </Import>
+                <Import>
+                    <Namespace>System.Linq.Expressions</Namespace>
+                </Import>
+            </Imports>
+			<Code Language="csharp"><![CDATA[public override async Task<Producto> GetByIdAsync(int id)
+            {
+                return await _context.Productos
+                                .Include(p=>p.Marca)
+                                .Include(p=>p.Categoria)
+                                .FirstOrDefaultAsync(p=>p.Id==id);
+
+            }
+            $end$]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>

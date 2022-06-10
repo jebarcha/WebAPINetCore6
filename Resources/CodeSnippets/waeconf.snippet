@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>Clase que implementa IEntityTypeConfiguration</Title>
+            <Author>Jimmy Javier</Author>
+            <Description>Crea el esqueleto de la configuración de una clase Entidad mediante Fluent Api.</Description>
+            <Shortcut>waeconf</Shortcut>
+        </Header>
+        <Snippet>
+            <Declarations>
+                <Literal>
+                    <ID>ClaseEntidad</ID>
+                    <ToolTip>Nombre de la clase entidad.</ToolTip>
+                    <Default>Clase</Default>
+                </Literal>            
+            </Declarations> 
+            <Code Language="CSharp">
+                <![CDATA[: IEntityTypeConfiguration<$ClaseEntidad$>
+{
+    public void Configure(EntityTypeBuilder<$ClaseEntidad$> builder)
+    {
+        
+
+    }$end$]]>
+            </Code>
+             <Imports>
+                <Import>
+                    <Namespace>Core.Entities</Namespace>
+                </Import>                
+                <Import>
+                    <Namespace>Microsoft.EntityFrameworkCore</Namespace>
+                </Import>                
+                <Import>
+                    <Namespace>Microsoft.EntityFrameworkCore.Metadata.Builders</Namespace>
+                </Import>                
+            </Imports>
+        </Snippet>
+    </CodeSnippet>
+</CodeSnippets>

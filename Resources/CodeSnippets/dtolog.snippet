@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>LoginDto</Title>
+			<Shortcut>dtolog</Shortcut>
+			<Description>Fragmento de código para generar la clase LoginDto.</Description>
+			<Author>Jimmy Javier</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>			       
+            <Imports>                
+                <Import>
+                    <Namespace>System.ComponentModel.DataAnnotations</Namespace>
+                </Import>            
+            </Imports>     
+			<Code Language="csharp"><![CDATA[public class LoginDto
+            {
+                [Required]
+                public string Username { get; set; }
+                [Required]
+                public string Password { get; set; }
+            }
+            $end$]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>

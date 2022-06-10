@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>Creación de Interfaz que implementa IGenericRepository</Title>
+            <Author>Jimmy Javier</Author>
+            <Description>Crea la interfaz que implementa IGenericRepository.</Description>
+            <Shortcut>irepo</Shortcut>
+        </Header>
+        <Snippet>
+            <Declarations>
+                <Literal>
+                    <ID>ClaseEntidad</ID>
+                    <ToolTip>Nombre de la clase entidad.</ToolTip>
+                    <Default>Clase</Default>
+                </Literal>            
+            </Declarations> 
+            <Code Language="CSharp">
+                <![CDATA[public interface I$ClaseEntidad$Repository : IGenericRepository<$ClaseEntidad$> { }
+                $end$]]>
+            </Code>
+             <Imports>
+                <Import>
+                    <Namespace>Core.Entities</Namespace>
+                </Import>                                
+            </Imports>
+        </Snippet>
+    </CodeSnippet>
+</CodeSnippets>

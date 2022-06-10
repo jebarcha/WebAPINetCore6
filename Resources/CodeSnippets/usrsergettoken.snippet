@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>GetTokenAsync</Title>
+			<Shortcut>usrsergettoken</Shortcut>
+			<Description>Fragmento de código para generar el método GetTokenAsync del UserService.</Description>
+			<Author>Jimmy Javier</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>			            
+			<Code Language="csharp"><![CDATA[public async Task<DatosUsuarioDto> GetTokenAsync(LoginDto model)
+            {
+                DatosUsuarioDto datosUsuarioDto = new DatosUsuarioDto();
+                var usuario = await _unitOfWork.Usuarios
+                            .GetByUsernameAsync(model.Username);
+
+                if (usuario == null)
+                {
+                    datosUsuarioDto.EstaAutenticado = false;
+                    datosUsuarioDto.Mensaje = $$"No existe ningún usuario con el username {model.Username}.";
+                    return datosUsuarioDto;
+                }
+
+                var resultado = _passwordHasher.VerifyHashedPassword(usuario, usuario.Password, model.Password);
+
+                if (resultado == PasswordVerificationResult.Success)
+                {
+                    datosUsuarioDto.EstaAutenticado = true;
+                    JwtSecurityToken jwtSecurityToken = CreateJwtToken(usuario);
+                    datosUsuarioDto.Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
+                    datosUsuarioDto.Email = usuario.Email;
+                    datosUsuarioDto.UserName = usuario.Username;
+                    datosUsuarioDto.Roles = usuario.Roles
+                                                    .Select(u => u.Nombre)
+                                                    .ToList();
+                    return datosUsuarioDto;
+                }
+                datosUsuarioDto.EstaAutenticado = false;
+                datosUsuarioDto.Mensaje = $$"Credenciales incorrectas para el usuario {usuario.Username}.";
+                return datosUsuarioDto;
+            }
+
+            private JwtSecurityToken CreateJwtToken(Usuario usuario)
+            {
+                var roles = usuario.Roles;
+                var roleClaims = new List<Claim>();
+                foreach (var role in roles)
+                {
+                    roleClaims.Add(new Claim("roles", role.Nombre));
+                }
+                var claims = new[]
+                {
+                                new Claim(JwtRegisteredClaimNames.Sub, usuario.Username),
+                                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                                new Claim(JwtRegisteredClaimNames.Email, usuario.Email),
+                                new Claim("uid", usuario.Id.ToString())
+                        }
+                .Union(roleClaims);
+                var symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwt.Key));
+                var signingCredentials = new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256);
+                var jwtSecurityToken = new JwtSecurityToken(
+                    issuer: _jwt.Issuer,
+                    audience: _jwt.Audience,
+                    claims: claims,
+                    expires: DateTime.UtcNow.AddMinutes(_jwt.DurationInMinutes),
+                    signingCredentials: signingCredentials);
+                return jwtSecurityToken;
+            }
+            $end$]]>
+			</Code>
+            <Imports>                
+                <Import>
+                    <Namespace>System.IdentityModel.Tokens.Jwt</Namespace>
+                </Import>
+                <Import>
+                    <Namespace>System.Security.Claims</Namespace>
+                </Import> 
+                <Import>
+                    <Namespace>Microsoft.IdentityModel.Tokens</Namespace>
+                </Import>    
+                <Import>
+                    <Namespace>System.Text</Namespace>
+                </Import>                   
+            </Imports>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>

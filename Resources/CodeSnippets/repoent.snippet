@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>Clase que implementa una interfaz junto con el repositorio genérico</Title>
+            <Author>Jimmy Javier</Author>
+            <Description>Clase que implementa una interfaz junto con el repositorio genérico.</Description>
+            <Shortcut>repoent</Shortcut>
+        </Header>
+        <Snippet>
+            <Declarations>
+                <Literal>
+                    <ID>ClaseEntidad</ID>
+                    <ToolTip>Nombre de la clase entidad.</ToolTip>
+                    <Default>Clase</Default>
+                </Literal>            
+            </Declarations> 
+            <Code Language="CSharp">
+                <![CDATA[public class $ClaseEntidad$Repository : GenericRepository<$ClaseEntidad$>, I$ClaseEntidad$Repository
+                {
+                    public $ClaseEntidad$Repository(TiendaContext context) : base(context)
+                    {
+                    }
+                }                
+                $end$]]>
+            </Code>
+             <Imports>
+                <Import>
+                    <Namespace>Core.Entities</Namespace>
+                </Import>
+                <Import>
+                    <Namespace>Core.Interfaces</Namespace>
+                </Import>
+                <Import>
+                    <Namespace>Infrastructure.Data</Namespace>
+                </Import>
+            </Imports>
+        </Snippet>
+    </CodeSnippet>
+</CodeSnippets>

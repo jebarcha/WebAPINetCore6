@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>Repositorio Genérico</Title>
+			<Shortcut>igenrepo</Shortcut>
+			<Description>Fragmento de código para generar un repositorio genérico</Description>
+			<Author>Jimmy Javier</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>			
+            <Imports>                
+                <Import>
+                    <Namespace>System.Linq.Expressions</Namespace>
+                </Import>                
+                <Import>
+                    <Namespace>Core.Entities</Namespace>
+                </Import>
+            </Imports>
+			<Code Language="csharp"><![CDATA[public interface IGenericRepository<T> where T : BaseEntity
+            {
+                Task<T> GetByIdAsync(int id);
+                Task<IEnumerable<T>> GetAllAsync();
+                IEnumerable<T> Find(Expression<Func<T, bool>> expression);
+                void Add(T entity);
+                void AddRange(IEnumerable<T> entities);
+                void Remove(T entity);
+                void RemoveRange(IEnumerable<T> entities);
+                void Update(T entity);
+            }
+            $end$]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>

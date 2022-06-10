@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>Relación Uno a Muchos mediante Fluent API</Title>
+            <Author>Jimmy Javier</Author>
+            <Description>Crea la definición de una relación uno a muchos mediante el uso de Fluent API.</Description>
+            <Shortcut>faonemany</Shortcut>
+        </Header>
+        <Snippet>
+            <Declarations>
+                <Literal>
+                    <ID>PropiedadUno</ID>
+                    <ToolTip>Nombre de la propiedad.</ToolTip>
+                    <Default>PropiedadUno</Default>
+                </Literal>
+                <Literal>
+                    <ID>PropiedadMuchos</ID>
+                    <ToolTip>Nombre de la propiedad.</ToolTip>
+                    <Default>PropiedadMuchos</Default>
+                </Literal>
+                <Literal>
+                    <ID>LlaveForanea</ID>
+                    <ToolTip>Propiedad que identifica a la llave foránea.</ToolTip>
+                    <Default>LlaveForanea</Default>
+                </Literal>
+            </Declarations> 
+            <Code Language="CSharp">
+                <![CDATA[builder.HasOne(p => p.$PropiedadUno$)
+                .WithMany(p => p.$PropiedadMuchos$)                
+                .HasForeignKey(p => p.$LlaveForanea$);
+                $end$]]>
+            </Code>             
+        </Snippet>
+    </CodeSnippet>
+</CodeSnippets>

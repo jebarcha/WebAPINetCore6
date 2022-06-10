@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>RevokeToken</Title>
+			<Shortcut>usrserrevtok</Shortcut>
+			<Description>Fragmento de código para generar el método RevokeToken del UserService.</Description>
+			<Author>Jimmy Javier</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>			            
+			<Code Language="csharp"><![CDATA[public async Task<bool> RevokeTokenAsync(string token)
+            {
+            
+                var usuario = await _unitOfWork.Usuarios
+                        .GetByTokenAsync(token);
+
+                // regresamos falso si el token no pertenece a ningún usuario
+                if (usuario == null) return false;
+                var refreshToken = usuario
+                                        .RefreshTokens
+                                        .Single(x => x.Token == token);
+                // regresamos falso si el token ya no está activo
+                if (!refreshToken.IsActive) return false;
+                // revocamos el token y guardamos los cambios
+                refreshToken.Revoked = DateTime.UtcNow;
+                _unitOfWork.Usuarios.Update(usuario);
+                await _unitOfWork.SaveAsync();        
+                return true;
+            }
+            $end$]]>
+			</Code>            
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>

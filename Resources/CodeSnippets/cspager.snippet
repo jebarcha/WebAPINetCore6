@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>Clase Pager</Title>
+			<Shortcut>cspager</Shortcut>
+			<Description>Fragmento de código para generar la clase Pager.</Description>
+			<Author>Jimmy Javier</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>	
+            <Imports>                
+                <Import>
+                    <Namespace>Core.Entities</Namespace>
+                </Import>                
+            </Imports>		            
+			<Code Language="csharp"><![CDATA[public class Pager<T> where T : class
+            {
+                public int PageIndex { get; set; }
+                public int PageSize { get; set; }
+                public int Total { get; set; }
+                public IEnumerable<T> Registers { get; set; }
+
+                public Pager(IEnumerable<T> registers, int total, int pageIndex,
+                    int pageSize)
+                {
+                    Registers = registers;
+                    Total = total;
+                    PageIndex = pageIndex;
+                    PageSize = pageSize;
+                }
+
+                public int TotalPages
+                {
+                    get
+                    {
+
+                        return (int)Math.Ceiling(Total / (double)PageSize);
+                    }
+                }
+
+                public bool HasPreviousPage
+                {
+                    get
+                    {
+                        return (PageIndex > 1);
+                    }
+                }
+
+                public bool HasNextPage
+                {
+                    get
+                    {
+                        return (PageIndex < TotalPages);
+                    }
+                }
+            }
+            $end$]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>

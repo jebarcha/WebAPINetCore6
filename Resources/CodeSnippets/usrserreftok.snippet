@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>Método RefreshTokenAsync del UserService.</Title>
+			<Shortcut>usrserreftok</Shortcut>
+			<Description>Fragmento de código para agregar el método RefreshTokenAsync del UserService.</Description>
+			<Author>Jimmy Javier</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>			            
+			<Code Language="csharp"><![CDATA[public async Task<DatosUsuarioDto> RefreshTokenAsync(string refreshToken)
+            {
+                var datosUsuarioDto = new DatosUsuarioDto();
+                
+                var usuario = await _unitOfWork.Usuarios
+                                .GetByRefreshTokenAsync(refreshToken);
+
+                if (usuario == null)
+                {
+                    datosUsuarioDto.EstaAutenticado = false;
+                    datosUsuarioDto.Mensaje = $$"El token no pertenece a ningún usuario.";
+                    return datosUsuarioDto;
+                }
+                
+                var refreshTokenBd = usuario.RefreshTokens.Single(x => x.Token == refreshToken);
+
+                if (!refreshTokenBd.IsActive)
+                {
+                    datosUsuarioDto.EstaAutenticado = false;
+                    datosUsuarioDto.Mensaje = $$"El token no está activo.";
+                    return datosUsuarioDto;
+                }
+                //Revocamos el Refresh Token actual y
+                refreshTokenBd.Revoked = DateTime.UtcNow;
+                //generamos un nuevo Refresh Token y lo guardamos en la Base de Datos
+                var newRefreshToken = CreateRefreshToken();
+                usuario.RefreshTokens.Add(newRefreshToken);
+                _unitOfWork.Usuarios.Update(usuario);
+                await _unitOfWork.SaveAsync();
+                //Generamos un nuevo Json Web Token 😊
+                datosUsuarioDto.EstaAutenticado = true;
+                JwtSecurityToken jwtSecurityToken = CreateJwtToken(usuario);
+                datosUsuarioDto.Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
+                datosUsuarioDto.Email = usuario.Email;
+                datosUsuarioDto.UserName = usuario.Username;
+                datosUsuarioDto.Roles = usuario.Roles
+                                                .Select(u => u.Nombre)
+                                                .ToList();
+                datosUsuarioDto.RefreshToken = newRefreshToken.Token;
+                datosUsuarioDto.RefreshTokenExpiration = newRefreshToken.Expires;
+                return datosUsuarioDto;
+            }
+            $end$]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>

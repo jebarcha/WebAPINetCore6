@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>Servicios de la Aplicación.</Title>
+			<Shortcut>emappser</Shortcut>
+			<Description>Método de Extensión para agregar los servicios de la aplicación</Description>
+			<Author>Jimmy Javier</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>			
+            <Imports>                                
+                <Import>
+                    <Namespace>Core.Interfaces</Namespace>
+                </Import>
+                <Import>
+                    <Namespace>Infrastructure.Repositories</Namespace>
+                </Import>
+            </Imports>
+			<Code Language="csharp"><![CDATA[public static void AddAplicacionServices(this IServiceCollection services)
+            {
+                services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+                services.AddScoped<IProductoRepository, ProductoRepository>();
+                services.AddScoped<IMarcaRepository, MarcaRepository>();
+                services.AddScoped<ICategoriaRepository, CategoriaRepository>();
+            }
+            $end$]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>

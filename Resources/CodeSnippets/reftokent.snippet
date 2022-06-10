@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>Clase Entidad RefreshToken.</Title>
+            <Author>Jimmy Javier</Author>
+            <Description>Clase que implementa la clase entidad RefreshToken.</Description>
+            <Shortcut>reftokent</Shortcut>
+        </Header>
+        <Snippet>           
+            <Code Language="CSharp">
+                <![CDATA[public class RefreshToken:BaseEntity
+            {
+                public int UsuarioId { get; set; }
+                public Usuario Usuario { get; set; }
+                public string Token { get; set; }
+                public DateTime Expires { get; set; }
+                public bool IsExpired => DateTime.UtcNow >= Expires;
+                public DateTime Created { get; set; }
+                public DateTime? Revoked { get; set; }
+                public bool IsActive => Revoked == null && !IsExpired;
+            }             
+                $end$]]>
+            </Code>             
+        </Snippet>
+    </CodeSnippet>
+</CodeSnippets>

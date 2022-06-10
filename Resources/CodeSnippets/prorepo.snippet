@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>Repositorio productos</Title>
+			<Shortcut>prorepo</Shortcut>
+			<Description>Fragmento de código para generar un repositorio de productos.</Description>
+			<Author>Jimmy Javier</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>			
+            <Imports>                                
+                <Import>
+                    <Namespace>Core.Entities</Namespace>
+                </Import>
+                <Import>
+                    <Namespace>Core.Interfaces</Namespace>
+                </Import>                
+                <Import>
+                    <Namespace>Infrastructure.Data</Namespace>
+                </Import>
+                <Import>
+                    <Namespace>Microsoft.EntityFrameworkCore</Namespace>
+                </Import>
+            </Imports>
+			<Code Language="csharp"><![CDATA[public class ProductoRepository : GenericRepository<Producto>, IProductoRepository
+            {
+                public ProductoRepository(TiendaContext context) : base(context)
+                {
+                }
+
+                public async Task<IEnumerable<Producto>> GetProductosMasCaros(int cantidad) => 
+                                await _context.Productos
+                                    .OrderByDescending(p => p.Precio)
+                                    .Take(cantidad)
+                                    .ToListAsync();
+            }
+            $end$]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>Método de Extensión para establecer CORS</Title>
+            <Author>Jimmy Javier</Author>
+            <Description>Método de Extensión para establecer CORS.</Description>
+            <Shortcut>secors</Shortcut>
+        </Header>
+        <Snippet>            
+            <Code Language="CSharp">
+                <![CDATA[public static void ConfigureCors(this IServiceCollection services) =>
+                services.AddCors(options =>
+                {
+                    options.AddPolicy("CorsPolicy", builder =>
+                        builder.AllowAnyOrigin()   //WithOrigins("https://dominio.com")
+                        .AllowAnyMethod()          //WithMethods("GET","POST")
+                        .AllowAnyHeader());        //WithHeaders("accept","content-type")
+                });$end$]]>
+            </Code>             
+        </Snippet>
+    </CodeSnippet>
+</CodeSnippets>

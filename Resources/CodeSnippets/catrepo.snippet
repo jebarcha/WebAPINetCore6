@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>Repositorio categorías</Title>
+			<Shortcut>catrepo</Shortcut>
+			<Description>Fragmento de código para generar un repositorio de categorías.</Description>
+			<Author>Jimmy Javier</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>			
+            <Imports>                                
+                <Import>
+                    <Namespace>Core.Entities</Namespace>
+                </Import>
+                <Import>
+                    <Namespace>Core.Interfaces</Namespace>
+                </Import>                
+                <Import>
+                    <Namespace>Infrastructure.Data</Namespace>
+                </Import>
+            </Imports>
+			<Code Language="csharp"><![CDATA[public class CategoriaRepository : GenericRepository<Categoria>, ICategoriaRepository
+            {
+                public CategoriaRepository(TiendaContext context) : base(context)
+                {
+                }
+            }
+            $end$]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>RegisterAsync</Title>
+			<Shortcut>usrserreg</Shortcut>
+			<Description>Fragmento de código para generar el método RegisterAsync del UserService.</Description>
+			<Author>Jimmy Javier</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>			
+            <Imports>                
+                <Import>
+                    <Namespace>API.Dtos</Namespace>
+                </Import>
+                <Import>
+                    <Namespace>API.Helpers</Namespace>
+                </Import>                
+            </Imports>
+			<Code Language="csharp"><![CDATA[public async Task<string> RegisterAsync(RegisterDto registerDto)
+            {
+                var usuario = new Usuario
+                {
+                    Nombres = registerDto.Nombres,
+                    ApellidoMaterno = registerDto.ApellidoMaterno,
+                    ApellidoPaterno = registerDto.ApellidoPaterno,
+                    Email = registerDto.Email,
+                    Username = registerDto.Username
+                };
+
+                usuario.Password = _passwordHasher.HashPassword(usuario, registerDto.Password);
+
+                var usuarioExiste = _unitOfWork.Usuarios
+                                            .Find(u => u.Username.ToLower() == registerDto.Username.ToLower())
+                                            .FirstOrDefault();
+
+                if (usuarioExiste == null)
+                {
+                    var rolPredeterminado = _unitOfWork.Roles
+                                            .Find(u => u.Nombre == Autorizacion.rol_predeterminado.ToString())
+                                            .First();
+                    try
+                    {
+                        usuario.Roles.Add(rolPredeterminado);
+                        _unitOfWork.Usuarios.Add(usuario);
+                        await _unitOfWork.SaveAsync();
+
+                        return $$"El usuario  {registerDto.Username } ha sido registrado exitosamente";
+                    }
+                    catch (Exception ex)
+                    {
+                        var message = ex.Message;
+                        return $$"Error: {message}";
+                    }
+                }
+                else
+                {
+                    return $$"El usuario con {registerDto.Username } ya se encuentra registrado.";
+                }
+            }
+            $end$]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>

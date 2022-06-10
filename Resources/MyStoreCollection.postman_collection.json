@@ -1,0 +1,334 @@
+{
+	"info": {
+		"_postman_id": "172527b9-46b9-49dd-a342-6ca4e1df9b72",
+		"name": "MyStoreCollection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18239208"
+	},
+	"item": [
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "GET All Products",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Version",
+								"value": "1.1",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://localhost:5001/api/Products?pageIndex=3&pageSize=3&search=yamaha",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Products"
+							],
+							"query": [
+								{
+									"key": "pageIndex",
+									"value": "3"
+								},
+								{
+									"key": "pageSize",
+									"value": "3"
+								},
+								{
+									"key": "search",
+									"value": "yamaha"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/api/Products/27",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Products",
+								"27"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add new product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":0,\r\n    \"name\":\"New Product 002x2\",\r\n    \"price\": 12760,\r\n    \"creationDate\": \"2022-06-03\",\r\n    \"brandId\":2,\r\n    \"categoryId\":2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/Products",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete product",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/api/Products/30",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Products",
+								"30"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modify product",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"New Product Demo 003x3\",\r\n    \"price\": 13811,\r\n    \"creationDate\": \"2022-06-07T00:00:00\",\r\n    \"brandId\": 3,\r\n    \"categoryId\": 3,\r\n    \"id\": 30\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/Products/30",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Products",
+								"30"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "JWT",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/api/Users/register",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetTokenAsync",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const dataUser = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Has properties\", function(){\r",
+									"    pm.expect(dataUser).to.have.property('userName');\r",
+									"    pm.expect(dataUser).to.have.property('token');\r",
+									"    pm.expect(dataUser).to.have.property('email');\r",
+									"});\r",
+									"\r",
+									"if (pm.test(\"Has properties\")){\r",
+									"    pm.globals.set('token', dataUser.token);\r",
+									"};\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"jchavez\",\r\n    \"password\":\"Pa$$w0rd\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/Users/token",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Users",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddRoleAsync",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/api/Users/addrole",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Users",
+								"addrole"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RefreshToken",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const dataUser = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Has properties\", function(){\r",
+									"    pm.expect(dataUser).to.have.property('userName');\r",
+									"    pm.expect(dataUser).to.have.property('token');\r",
+									"    pm.expect(dataUser).to.have.property('email');\r",
+									"});\r",
+									"\r",
+									"if (pm.test(\"Has properties\")){\r",
+									"    pm.globals.set('token', dataUser.token);\r",
+									"};"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/api/Users/refresh-token",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Users",
+								"refresh-token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

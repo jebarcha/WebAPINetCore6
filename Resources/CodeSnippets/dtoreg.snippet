@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>RegisterDto</Title>
+			<Shortcut>dtoreg</Shortcut>
+			<Description>Fragmento de código para generar la clase RegisterDto.</Description>
+			<Author>Jimmy Javier</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>			       
+            <Imports>                
+                <Import>
+                    <Namespace>System.ComponentModel.DataAnnotations</Namespace>
+                </Import>            
+            </Imports>     
+			<Code Language="csharp"><![CDATA[public class RegisterDto
+            {
+                [Required]
+                public string Nombres { get; set; }
+                [Required]
+                public string ApellidoPaterno { get; set; }
+                [Required]
+                public string ApellidoMaterno { get; set; }
+                [Required]
+                public string Email { get; set; }
+                [Required]
+                public string Username { get; set; }
+                [Required]
+                public string Password { get; set; }
+            }
+            $end$]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>

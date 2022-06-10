@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>Interface para repositorio categorías</Title>
+			<Shortcut>icatrepo</Shortcut>
+			<Description>Fragmento de código para generar una interface para el repositorio de categorías.</Description>
+			<Author>Jimmy Javier</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>			
+            <Imports>                                
+                <Import>
+                    <Namespace>Core.Entities</Namespace>
+                </Import>
+            </Imports>
+			<Code Language="csharp"><![CDATA[public interface ICategoriaRepository:IGenericRepository<Categoria>{ }
+            $end$]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>

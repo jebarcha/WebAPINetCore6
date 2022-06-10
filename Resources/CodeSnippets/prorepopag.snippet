@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>Repositorio Producto Método Paginación</Title>
+			<Shortcut>prorepopag</Shortcut>
+			<Description>Fragmento de código para generar el método de paginación en el repositorio productos.</Description>
+			<Author>Jimmy Javier</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>			            
+			<Code Language="csharp"><![CDATA[public override async Task<(int totalRegistros, IEnumerable<Producto> registros)> GetAllAsync(int pageIndex, int pageSize)
+            {
+                var totalRegistros = await _context.Productos                
+                                            .CountAsync();
+
+                var registros = await   _context.Productos                                
+                                        .Include(u=>u.Marca)
+                                        .Include(u=>u.Categoria)
+                                        .Skip((pageIndex - 1) * pageSize)
+                                        .Take(pageSize)
+                                        .ToListAsync();
+
+                return (totalRegistros, registros);
+            }
+            $end$]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>
